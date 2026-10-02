@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block title %}Victoire | Jeu du pendu{% endblock %}
+
+{% block content %}
+
+  <h1>Félicitations !</h1>
+
+  <p>Bravo {{ nom }} !</p>
+
+  <p>Tu as trouvé le mot : <strong>{{ mot_secret }}</strong></p>
+
+  <a href="/">Rejouer</a>
+
+{% endblock %}

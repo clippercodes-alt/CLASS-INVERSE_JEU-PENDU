@@ -1,0 +1,15 @@
+{% extends 'layout.html' %}
+
+{% block title %}Game Over | Jeu du pendu{% endblock %}
+
+{% block content %}
+
+  <h1>Game Over !</h1>
+
+  <p>Dommage {{ nom }} !</p>
+
+  <p>Le mot était : <strong>{{ mot_secret }}</strong></p>
+
+  <a href="/">Rejouer</a>
+
+{% endblock %}

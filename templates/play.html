@@ -1,0 +1,23 @@
+{% extends 'layout.html' %}
+
+{% block title %}Jeu | Jeu du pendu{% endblock %}
+
+{% block content %}
+
+  <h1>Le jeu commence !</h1>
+
+  <p>Bonjour {{ nom }} !</p>
+
+  <p>Mot : {{ mot_cache }}</p>
+
+  <p>Vies restantes : {{ session["vies"] }}</p>
+
+  <form action="/play" method="post">
+
+    {% for lettre in "abcdefghijklmnopqrstuvwxyz" %}
+      <button type="submit" name="lettre" value="{{ lettre }}">{{ lettre.upper() }}</button>
+    {% endfor %}
+
+  </form>
+
+{% endblock %}

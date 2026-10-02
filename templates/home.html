@@ -1,0 +1,16 @@
+{% extends 'layout.html' %}
+
+{% block title %}Accueil | Jeu du pendu{% endblock %}
+
+{% block content %}
+
+  <h1>Jeu du pendu</h1>
+
+  <form action="/play" method="post">
+    <label for="nom">Votre nom :</label>
+    <input type="text" id="nom" name="nom">
+
+    <button type="submit">Démarrer</button>
+  </form>
+
+{% endblock %}
