@@ -32,6 +32,8 @@ def play():
         session["mot_secret"] = mot_secret
 
         session["vies"] = 5
+        session["potence"] = 0
+        session["lettres_jouees"] = []
 
         mot_cache = "_" * len(mot_secret)
         session["mot_cache"] = mot_cache
@@ -43,6 +45,19 @@ def play():
         mot_cache = session["mot_cache"]
 
         if lettre:
+
+            # Vérifier si la lettre a déjà été jouée
+            if lettre in session["lettres_jouees"]:
+                return render_template(
+                    "play.html",
+                    nom=nom,
+                    mot_secret=mot_secret,
+                    mot_cache=mot_cache
+                )
+
+            # Ajouter la lettre à la liste des lettres jouées
+            session["lettres_jouees"].append(lettre)
+
             if lettre in mot_secret:
                 nouveau_cache = ""
 
@@ -57,6 +72,7 @@ def play():
 
             else:
                 session["vies"] -= 1
+                session["potence"] += 1
 
                 if session["vies"] == 0:
                     return render_template(
@@ -65,9 +81,21 @@ def play():
                         mot_secret=mot_secret
                     )
 
+            # Vérifier si le joueur a gagné
+            if mot_cache == mot_secret:
+                return render_template(
+                    "win.html",
+                    nom=nom,
+                    mot_secret=mot_secret
+                )
+
     return render_template(
         "play.html",
         nom=nom,
         mot_secret=mot_secret,
         mot_cache=mot_cache
     )
+
+
+if __name__ == "__main__":
+    app.run(debug=True)

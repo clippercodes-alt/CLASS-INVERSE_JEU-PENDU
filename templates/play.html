@@ -10,12 +10,86 @@
 
   <p>Mot : {{ mot_cache }}</p>
 
+  <p>Nombre de lettres : {{ mot_secret|length }}</p>
+
   <p>Vies restantes : {{ session["vies"] }}</p>
+
+  <h2>Potence</h2>
+
+  {% if session["potence"] == 0 %}
+    <pre>
+  ______
+  |
+  |
+  |
+__|__
+    </pre>
+
+  {% elif session["potence"] == 1 %}
+    <pre>
+  ______
+  |    |
+  |
+  |
+__|__
+    </pre>
+
+  {% elif session["potence"] == 2 %}
+    <pre>
+  ______
+  |    |
+  |    O
+  |
+__|__
+    </pre>
+
+  {% elif session["potence"] == 3 %}
+    <pre>
+  ______
+  |    |
+  |    O
+  |    |
+  |
+__|__
+    </pre>
+
+  {% elif session["potence"] == 4 %}
+    <pre>
+  ______
+  |    |
+  |    O
+  |   /|\
+  |
+__|__
+    </pre>
+
+  {% elif session["potence"] == 5 %}
+    <pre>
+  ______
+  |    |
+  |    O
+  |   /|\
+  |   / \
+__|__
+    </pre>
+  {% endif %}
+
+  <h2>Choisis une lettre :</h2>
 
   <form action="/play" method="post">
 
     {% for lettre in "abcdefghijklmnopqrstuvwxyz" %}
-      <button type="submit" name="lettre" value="{{ lettre }}">{{ lettre.upper() }}</button>
+
+      {% if lettre in session["lettres_jouees"] %}
+        <button type="button" disabled>
+          {{ lettre.upper() }}
+        </button>
+      {% else %}
+        <button type="submit" name="lettre" value="{{ lettre }}">
+          {{ lettre.upper() }}
+        </button>
+      {% endif %}
+
     {% endfor %}
 
   </form>
